@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'accounts',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -99,6 +100,10 @@ LOGGING = {
 DATABASES = { 
     'default': dj_database_url.config()
 }
+
+
+# Custom user model
+AUTH_USER_MODEL = 'accounts.Member'
 
 
 # Internationalization
