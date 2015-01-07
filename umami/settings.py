@@ -71,6 +71,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+ALLOWED_HOSTS = ['*']
 ROOT_URLCONF = 'umami.urls'
 
 WSGI_APPLICATION = 'umami.wsgi.application'
