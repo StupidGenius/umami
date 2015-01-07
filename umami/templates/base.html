@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>{% block page_title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}ui/semantic.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}base.css">
+</head>
+<body>
+    <nav class="ui fixed menu inverted navbar">
+        <a href="" class="brand item">UMAMI</a>
+        <a href="" class="active item">Home</a>
+        <a href="" class="item">Games</a>
+        <a href="" class="item">Contact</a>
+    </nav>
+    <main class="ui page grid">
+    {% block page_content %}{% endblock %}
+    </main>
+</body>
+</html>
