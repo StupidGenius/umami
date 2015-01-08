@@ -46,6 +46,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', get_random_string(50,
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DEBUG', False))
 TEMPLATE_DEBUG = bool(os.environ.get('TEMPLATE_DEBUG', False))
+INTERNAL_IPS = os.environ.get('INTERNAL_IPS', '').split()
+
+if DEBUG:
+    SESSION_COOKIE_SECURE = False
 
 
 # Application definition
@@ -63,7 +67,7 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'sslify.middleware.SSLifyMiddleware',
+    'sslify.middleware.SSLifyMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
