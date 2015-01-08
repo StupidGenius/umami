@@ -26,6 +26,7 @@ SOFTWARE.
 
 from django import forms
 from django.contrib import admin
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from accounts.models import Member
 
@@ -65,5 +66,22 @@ class MemberCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class MemberChangeForm(forms.ModelForm):
+    class MemberChangeForm(forms.ModelForm):
+        username = forms.RegexField(
+            label="Username", max_length=30, regex=r'^[A-Za-z0-9_.+-]+$',
+            help_text="Required. 30 characters or fewer. Letters, digits and ./+/-/_ only.",
+            error_messages={'invalid': "This value may contain only letters, numbers and ./+/-/_ characters."})
+        password = ReadOnlyPasswordHashField(label="Password",
+            help_text="Raw passwords are not stored, so there is no way to see "
+                      "this user's password, but you can change the password "
+                      "using <a href=\"password/\">this form</a>.")
+    class Meta:
+        model = Member
+
+    def clean_password(self):
+        return self.initial["password"]
 
 
