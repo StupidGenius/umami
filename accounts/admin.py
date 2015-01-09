@@ -24,64 +24,55 @@ SOFTWARE.
 
 """
 
-from django import forms
 from django.contrib import admin
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.models import Group
+from django.contrib.auth.forms import AdminPasswordChangeForm
+from django.contrib.auth.admin import UserAdmin
 
 from accounts.models import Member
+from accounts.forms import MemberCreationForm, MemberChangeForm
 
-
-class MemberCreationForm(forms.ModelForm):
-    username = forms.RegexField(label='Username', max_length=30,
-        regex=r'^[A-Za-z0-9_.+-]+$', help_text="Required. 30 characters or fewer. Letters, digits and ./+/-/_ only.",
-        error_messages={'invalid': "This value may contain only letters, numbers and ./+/-/_ characters."}
+class MemberAdmin(UserAdmin):
+    save_on_top = True
+    list_display = ('id',
+                    'username',
+                    'status',
+                    'display_name',
+                    'first_name',
+                    'last_name',
+                    'email',
+                    'is_active',
+                    'is_staff',
+                    'is_superuser')
+    filter_horizontal = ['groups', 'user_permissions']
+    readonly_fields = ['password', 'last_login', 'date_joined', 'host']
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        ('Personal info', {'fields': ('display_name', 'first_name', 'last_name', 'email')}),
+        ('Permissions', {'fields': ('status', 'is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+        ('Audit', {'fields': ('host',)}),
     )
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'password1', 'password2')}
+        ),
+    )
+    list_filter = ['status', 'is_active', 'is_staff', 'is_superuser']
+    list_display_links = ['username']
+    ordering = ['id']
+    search_fields = ['username', 'display_name', 'first_name', 'last_name', 'email']
+    form = MemberChangeForm
+    add_form = MemberCreationForm
+    change_password_form = AdminPasswordChangeForm
 
-    class Meta:
-        model = Member
-        fields = ('username',)
-
-    def clean_username(self):
-        username = self.cleaned_data["username"]
-        try:
-            Member.objects.get(username=username)
-        except Member.DoesNotExist:
-            return username
-        raise forms.ValidationError("A user with that username already exists.")
-
-    def clean_password2(self):
-        # Check that the two password entries match
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords don't match")
-        return password2
-
-    def save(self, commit=True):
-        # Save the provided password in hashed format
-        user = super(MemberCreationForm, self).save(commit=False)
-        user.set_password(self.cleaned_data["password1"])
-        if commit:
-            user.save()
-        return user
+    def get_urls(self):
+        from django.conf.urls import patterns
+        return patterns('',
+            (r'^(\d+)/password/$', self.admin_site.admin_view(self.user_change_password))) + super(MemberAdmin, self).get_urls()
 
 
-class MemberChangeForm(forms.ModelForm):
-    class MemberChangeForm(forms.ModelForm):
-        username = forms.RegexField(
-            label="Username", max_length=30, regex=r'^[A-Za-z0-9_.+-]+$',
-            help_text="Required. 30 characters or fewer. Letters, digits and ./+/-/_ only.",
-            error_messages={'invalid': "This value may contain only letters, numbers and ./+/-/_ characters."})
-        password = ReadOnlyPasswordHashField(label="Password",
-            help_text="Raw passwords are not stored, so there is no way to see "
-                      "this user's password, but you can change the password "
-                      "using <a href=\"password/\">this form</a>.")
-    class Meta:
-        model = Member
-
-    def clean_password(self):
-        return self.initial["password"]
+admin.site.register(Member, MemberAdmin)
 
 
