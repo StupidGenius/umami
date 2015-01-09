@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'registration',
     'accounts',
 )
 
@@ -108,6 +109,14 @@ DATABASES = {
 
 # Custom user model
 AUTH_USER_MODEL = 'accounts.Member'
+
+
+# Login accounts
+REGISTRATION_OPEN = True
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = False
+LOGIN_URL = '/account/login/'
+LOGIN_REDIRECT_URL = '/'
 
 
 # Internationalization
