@@ -10,10 +10,10 @@
                 {% include "form_field.html" with field=form.username %}
                 {% include "form_field.html" with field=form.password %}
                 <div class="ui hidden divider"></div>
-                <div class="ui primary right labeled icon button" onClick="document.forms[0].submit();">
+                <button class="ui primary right labeled icon button" type="submit">
                     <i class="sign in icon"></i>
                     Log In
-                </div>
+                </button>
                 <input type="hidden" name="next" value="{{ next }}" />
             </form>
         </div>
@@ -22,7 +22,8 @@
             Or
         </div>
         <div class="ui hidden divider"></div>
-        <div class="ui green right labeled icon button">
+        <div class="ui green right labeled icon button" style="cursor: pointer;"
+                onclick="window.location='{% url 'registration_register' %}';">
             <i class="signup icon"></i>
             Sign Up
         </div>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -9,30 +10,30 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}ui/semantic.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}base.css">
 </head>
+
 <body>
-    <div class="ui page grid">
-        <div class="row">
-            <div class="ui fixed menu inverted navbar page grid">
-                <a href="" class="brand item">UMAMI</a>
-                <a href="/" class="active item">Home</a>
-                <a href="" class="item">Games</a>
-                <a href="" class="item">Tools</a>
-                {% if user.is_active %}{% if user.is_staff or user.is_superuser %}
-                <a href="/admin/" class="item">Admin</a>
-                {% endif %}{% endif %}
-                <div class="right menu">
-                    {% if user.is_active %}
-                        <a href="{% url 'auth_logout' %}" class="item">Logout</a>
-                    {% else %}
-                        <a href="{% url 'auth_login' %}" class="item">Login</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        <div class="ui hidden divider"></div>
-        <div class="row">
-        {% block page_content %}{% endblock %}
+
+    <div class="ui fixed menu inverted navbar page grid">
+        <a href="" class="brand item">UMAMI</a>
+        <a href="/" class="active item">Home</a>
+        <a href="" class="item">Games</a>
+        <a href="" class="item">Tools</a>
+        {% if user.is_active %}{% if user.is_staff or user.is_superuser %}
+        <a href="/admin/" class="item">Admin</a>
+        {% endif %}{% endif %}
+        <div class="right menu">
+            {% if user.is_active %}
+            <a href="{% url 'auth_logout' %}" class="item">Logout</a>
+            {% else %}
+            <a href="{% url 'auth_login' %}" class="item">Login</a>
+            {% endif %}
         </div>
     </div>
+
+    <div class="ui main page grid">
+    {% block page_content %}{% endblock %}
+    </div>
+
 </body>
+
 </html>

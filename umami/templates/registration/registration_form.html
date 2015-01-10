@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block page_title %}Register{% endblock %}
+
+{% block page_content %}
+<div class="four wide column">
+        <div class="ui form">
+            <form method="post" action=".">
+                {% csrf_token %}
+                {% include "form_field.html" with field=form.username %}
+                {% include "form_field.html" with field=form.email %}
+                {% include "form_field.html" with field=form.password1 %}
+                {% include "form_field.html" with field=form.password2 %}
+                <button class="ui primary right labeled icon button" type="submit">
+                    <i class="signup icon"></i>
+                    Sign Up
+                </button>
+                <button class="ui right labeled icon button" type="reset">
+                    <i class="erase icon"></i>
+                    Reset
+                </button>
+            </form>
+        </div>
+</div>
+{% endblock %}
+
