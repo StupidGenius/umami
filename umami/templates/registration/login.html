@@ -3,30 +3,37 @@
 {% block page_title %}Login{% endblock %}
 
 {% block page_content %}
-<div class="four wide column">
-        <div class="ui fluid form">
-            <form method="post" action=".">
-                {% csrf_token %}
-                {% include "form_field.html" with field=form.username %}
-                {% include "form_field.html" with field=form.password %}
-                <div class="ui hidden divider"></div>
-                <button class="ui primary right labeled icon button" type="submit">
-                    <i class="sign in icon"></i>
-                    Log In
-                </button>
-                <input type="hidden" name="next" value="{{ next }}" />
-            </form>
+<div class="eight wide column">
+    <h3 class="ui top attached header">Login</h3>
+    <div class="ui attached segment">
+        <div class="ui two column middle aligned relaxed fitted stackable grid">
+            <div class="column">
+                <div class="ui fluid form">
+                    <form method="post" action=".">
+                        {% csrf_token %}
+                        {% include "form_field.html" with field=form.username %}
+                        {% include "form_field.html" with field=form.password %}
+                        <div class="ui hidden divider"></div>
+                        <button class="ui primary right labeled icon button" type="submit">
+                            <i class="sign in icon"></i>
+                            Log In
+                        </button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </form>
+                </div>
+            </div>
+            <div class="ui vertical divider">
+                Or
+            </div>
+            <div class="center aligned column">
+                <div class="ui green right labeled icon button" style="cursor: pointer;"
+                        onclick="window.location='{% url 'registration_register' %}';">
+                    <i class="signup icon"></i>
+                    Sign Up
+                </div>
+            </div>
         </div>
-        <div class="ui hidden divider"></div>
-        <div class="ui horizontal divider">
-            Or
-        </div>
-        <div class="ui hidden divider"></div>
-        <div class="ui green right labeled icon button" style="cursor: pointer;"
-                onclick="window.location='{% url 'registration_register' %}';">
-            <i class="signup icon"></i>
-            Sign Up
-        </div>
+    </div>
 </div>
 {% endblock %}
 
