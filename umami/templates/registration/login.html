@@ -1,19 +1,31 @@
 {% extends "base.html" %}
 
+{% block page_title %}Login{% endblock %}
+
 {% block page_content %}
-    <div class="row">
-        <div class="column padding-reset">
-            <h1>Login</h1>
+<div class="four wide column">
+        <div class="ui fluid form">
             <form method="post" action=".">
                 {% csrf_token %}
-                {{ form.as_p }}
-
-                <input type="submit" value="Log in" />
+                {% include "form_field.html" with field=form.username %}
+                {% include "form_field.html" with field=form.password %}
+                <div class="ui hidden divider"></div>
+                <div class="ui primary right labeled icon button" onClick="document.forms[0].submit();">
+                    <i class="sign in icon"></i>
+                    Log In
+                </div>
                 <input type="hidden" name="next" value="{{ next }}" />
             </form>
-
-            <p>Not  a member? <a href="{% url 'registration_register' %}">Register</a>!</p>
         </div>
-    </div>
+        <div class="ui hidden divider"></div>
+        <div class="ui horizontal divider">
+            Or
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="ui green right labeled icon button">
+            <i class="signup icon"></i>
+            Sign Up
+        </div>
+</div>
 {% endblock %}
 

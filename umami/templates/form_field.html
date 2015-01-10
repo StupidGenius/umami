@@ -1,0 +1,9 @@
+<div class="{{ class|default:"field" }}{% if field.required %} required{% endif %}{% if field.errors %} error{% endif %}">
+    {{ field.label_tag }}
+    {{ field }}
+    {% if field.errors %}
+    <div class="ui red pointing up label">
+        {{ field.errors }}
+    </div>
+    {% endif %}
+</div>

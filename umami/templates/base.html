@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}base.css">
 </head>
 <body>
-    <div class="ui grid">
+    <div class="ui page grid">
         <div class="row">
             <div class="ui fixed menu inverted navbar page grid">
                 <a href="" class="brand item">UMAMI</a>
@@ -29,9 +29,10 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="ui page grid main">
-    {% block page_content %}{% endblock %}
+        <div class="ui hidden divider"></div>
+        <div class="row">
+        {% block page_content %}{% endblock %}
+        </div>
     </div>
 </body>
 </html>
