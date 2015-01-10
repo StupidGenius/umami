@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block page_title %}Login{% endblock %}
+
+{% block page_content %}
+<div class="four wide column">
+        <div class="ui fluid form">
+            <form method="post" action=".">
+                {% csrf_token %}
+                {% include "form_field.html" with field=form.username %}
+                {% include "form_field.html" with field=form.password %}
+                <div class="ui hidden divider"></div>
+                <div class="ui primary right labeled icon button" onClick="document.forms[0].submit();">
+                    <i class="sign in icon"></i>
+                    Log In
+                </div>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="ui horizontal divider">
+            Or
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="ui green right labeled icon button">
+            <i class="signup icon"></i>
+            Sign Up
+        </div>
+</div>
+{% endblock %}
+
