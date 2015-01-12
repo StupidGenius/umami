@@ -24,14 +24,25 @@
 # 
 # 
 
-SECRET_KEY=`openssl rand -base64 32`
+# These do not need to be modified.
+export SECRET_KEY PYTHONHASHSEED 
+export DATABASE_URL
+export DEBUG TEMPLATE_DEBUG INTERNAL_IPS
+export EMAIL_HOST EMAIL_PORT EMAIL_HOST_USER EMAIL_HOST_PASSWORD EMAIL_USE_TLS EMAIL_USE_SSL
+
+# Leave these.
+: ${SECRET_KEY=`openssl rand -base64 32`}
 PYTHONHASHSEED=random
+
+# Set this to the URL for the database if you are not using the default Postgres database.
 #DATABASE_URL=
 
+# Set these to turn on debugging and disable SSLify.  Do not enable these in production.
 DEBUG=
 TEMPLATE_DEBUG=
 INTERNAL_IPS=
 
+# Set these to match your local e-mail configuration.
 EMAIL_HOST=mail.example.com
 EMAIL_PORT=25
 EMAIL_HOST_USER=test

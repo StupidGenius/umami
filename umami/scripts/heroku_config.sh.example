@@ -24,13 +24,16 @@
 # 
 # 
 
-heroku config:set SECRET_KEY=`openssl rand -base64 32`
+# No need to change this.
+( heroku config:get SECRET_KEY | grep . > /dev/null ) && heroku config:set SECRET_KEY=`openssl rand -base64 32`
 heroku config:set PYTHONHASHSEED=random
 
+# Set these to turn on debugging and disable SSLify.  Do not enable these in production.
 heroku config:set DEBUG=
 heroku config:set TEMPLATE_DEBUG=
 heroku config:set INTERNAL_IPS=
 
+# Set these to match your local e-mail configuration.
 heroku config:set EMAIL_HOST=mail.example.com
 heroku config:set EMAIL_PORT=25
 heroku config:set EMAIL_HOST_USER=test
