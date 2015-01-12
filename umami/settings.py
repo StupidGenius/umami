@@ -120,6 +120,15 @@ LOGIN_URL = '/account/login/'
 LOGIN_REDIRECT_URL = '/'
 
 
+# E-mail transport
+EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', 25)
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_USE_TLS = bool(os.environ.get('EMAIL_USE_TLS', False))
+EMAIL_USE_SSL = bool(os.environ.get('EMAIL_USE_SSL', False))
+
+
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
