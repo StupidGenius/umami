@@ -2,7 +2,7 @@
 {% load url from future %}
 {% blocktrans %}
 You (or someone pretending to be you) have asked to register an account at
-{{ site.name }}. 
+{{ request.scheme }}://{{ request.get_host }} . 
 {% endblocktrans %}
     {% trans "Username:" %} {{ user.username }}
 {% blocktrans %}

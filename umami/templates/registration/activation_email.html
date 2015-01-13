@@ -11,14 +11,13 @@
 <p>
     {% blocktrans %}
     You (or someone pretending to be you) have asked to register an account at
-    {{ site.name }}.
+    {{ request.scheme }}://{{ request.get_host }} .
     {% endblocktrans %}
 </p>
 
-<dl>
-    <dt>{% trans "Username" %}</dt>
-    <dd>{{ user.username }}</dd>
-</dl>
+<ul>
+    <li style="list-style-type: none;">{% trans "Username" %}: <strong>{{ user.username }}</strong></li>
+</ul>
 
 <p>
     {% blocktrans %}

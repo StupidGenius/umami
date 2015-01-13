@@ -122,8 +122,9 @@ LOGIN_REDIRECT_URL = '/'
 
 
 # E-mail transport
-DEFAULT_FROM_EMAIL=os.environ.get('DEFAULT_FROM_EMAIL', '')
-SERVER_EMAIL=os.environ.get('SERVER_EMAIL', '')
+EMAIL_SUBJECT_PREFIX = '[UMAMI]'
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', '')
+SERVER_EMAIL = os.environ.get('SERVER_EMAIL', '')
 EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
 EMAIL_PORT = os.environ.get('EMAIL_PORT', 25)
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
