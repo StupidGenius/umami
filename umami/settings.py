@@ -26,6 +26,7 @@ SOFTWARE.
 
 import os
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 from django.utils.crypto import get_random_string
 
 import dj_database_url
@@ -121,6 +122,8 @@ LOGIN_REDIRECT_URL = '/'
 
 
 # E-mail transport
+DEFAULT_FROM_EMAIL=os.environ.get('DEFAULT_FROM_EMAIL', '')
+SERVER_EMAIL=os.environ.get('SERVER_EMAIL', '')
 EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
 EMAIL_PORT = os.environ.get('EMAIL_PORT', 25)
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
@@ -153,6 +156,9 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Templates
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
+)
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
 )
 
 

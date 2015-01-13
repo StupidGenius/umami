@@ -1,12 +1,13 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block page_title %}Activation{% endblock %}
+{% block page_title %}{% trans "Activation" %}{% endblock %}
 
 {% block page_content %}
 <div class="four wide column">
-    <h3 class="ui top attached header">Activation E-Mail Sent</h3>
+    <h3 class="ui top attached header">{% trans "Activation E-Mail Sent" %}</h3>
     <div class="ui attached segment">
-        <p>Please check your email to complete the registration process.</p>
+        <p>{% trans "Please check your email to complete the registration process." %}</p>
     </div>
 </div>
 {% endblock %}

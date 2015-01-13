@@ -34,6 +34,8 @@ heroku config:set TEMPLATE_DEBUG=
 heroku config:set INTERNAL_IPS=
 
 # Set these to match your local e-mail configuration.
+heroku config:set DEFAULT_FROM_EMAIL=webmaster@example.com
+heroku config:set SERVER_EMAIL=webmaster@example.com
 heroku config:set EMAIL_HOST=mail.example.com
 heroku config:set EMAIL_PORT=25
 heroku config:set EMAIL_HOST_USER=test

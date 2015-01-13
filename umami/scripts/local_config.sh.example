@@ -28,6 +28,7 @@
 export SECRET_KEY PYTHONHASHSEED 
 export DATABASE_URL
 export DEBUG TEMPLATE_DEBUG INTERNAL_IPS
+export DEFAULT_FROM_EMAIL SERVER_EMAIL
 export EMAIL_HOST EMAIL_PORT EMAIL_HOST_USER EMAIL_HOST_PASSWORD EMAIL_USE_TLS EMAIL_USE_SSL
 
 # Leave these.
@@ -43,6 +44,8 @@ TEMPLATE_DEBUG=
 INTERNAL_IPS=
 
 # Set these to match your local e-mail configuration.
+DEFAULT_FROM_EMAIL=webmaster@example.com
+SERVER_EMAIL=webmaster@example.com
 EMAIL_HOST=mail.example.com
 EMAIL_PORT=25
 EMAIL_HOST_USER=test
