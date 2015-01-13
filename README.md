@@ -11,14 +11,14 @@ The current plan for the project is to develop a web-based tool that is easy to 
  
 ## Installation
 
-1. Clone the Git repository.
+- Clone the Git repository.
 
 ```shell
 git clone git@github.com:AIE-Guild/umami.git
 cd umami
 ```
 
-2. Configure the virtualenv environment.
+- Configure the virtualenv environment.
 
 ```shell
 virtualenv env
@@ -29,27 +29,27 @@ requirements.txt
 
 ## Running the test server locally
 
-1. Copy the default environment configuration script.
+- Copy the default environment configuration script.
 
 ```shell
 cp umami/scripts/local_config.sh.example local_config.sh
 ```
 
-2. Edit `local_config.sh`.
+- Edit `local_config.sh`.
 
-3. Configure the environment.
+- Configure the environment.
 
 ```shell
 source local_config.sh
 ```
 
-4. Initialize the database.
+- Initialize the database.
 
 ```shell
 python manage.py syncdb
 ```
 
-5. Start the test server.
+- Start the test server.
 
 ```shell
 foreman start
