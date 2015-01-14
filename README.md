@@ -9,6 +9,18 @@ The current plan for the project is to develop a web-based tool that is easy to 
 - Support for membership applications for MMORPGs that use character or account membership models.
 - An extensible platform for the development of other guild management tools.
  
+## Requirements
+
+Your development environment must have the following software.
+
+- [virtualenv](https://virtualenv.pypa.io/en/latest/)
+- [pip](https://pip.pypa.io/en/latest/)
+
+If you plan to deploy this on Heroku, you will also need the following.
+
+- [heroku-toolbelt](https://toolbelt.heroku.com/)
+
+
 ## Installation
 
 - Clone the Git repository.
@@ -26,6 +38,7 @@ source env/bin/activate
 pip install -r 
 requirements.txt
 ```
+
 
 ## Running the test server locally
 
@@ -55,5 +68,41 @@ python manage.py syncdb
 foreman start
 ```
 
+## Running on Heroku
 
+- Copy the default environment configuration script.
+
+```shell
+cp umami/scripts/heroku_config.sh.example heroku_config.sh
+```
+
+- Edit `heroku_config.sh`.
+
+- Create the Heroku instance.
+
+```shell
+heroku login
+heroku create
+heroku ps:scale web=1
+```
+
+This will add a remote repository named "heroku".
+
+- Configure the environment.
+
+```shell
+source heroku_config.sh
+```
+
+- Deploy the application to Heroku.
+
+```shell
+git push heroku master
+```
+
+- Initialize the database.
+
+```shell
+heroku run python manage.py syncdb
+```
 
