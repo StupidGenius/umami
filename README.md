@@ -15,6 +15,7 @@ Your development environment must have the following software.
 
 - [virtualenv](https://virtualenv.pypa.io/en/latest/)
 - [pip](https://pip.pypa.io/en/latest/)
+- [PostgreSQL](http://www.postgresql.org/) - This is optional, Heroku uses it by default but you will have to set the DATABASE_URL environment variable if you wish to use a different database or use an alternate PostgreSQL database.
 
 If you plan to deploy this on Heroku, you will also need the following.
 
