@@ -4,11 +4,17 @@
 {% block page_title %}{% trans "Login" %}{% endblock %}
 
 {% block page_content %}
-<div class="eight wide column">
+<div class="column">
     <h3 class="ui top attached header">Login</h3>
     <div class="ui attached segment">
         <div class="ui two column middle aligned relaxed fitted stackable grid">
             <div class="column">
+                {% if form.non_field_errors %}
+                <div class="ui compact error message">
+                    <div class="header">{% trans "Login Failed" %}</div>
+                    <p>{{ form.non_field_errors }}</p>
+                </div>
+                {% endif %}
                 <div class="ui fluid form">
                     <form method="post" action=".">
                         {% csrf_token %}
