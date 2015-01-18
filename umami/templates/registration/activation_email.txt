@@ -16,8 +16,4 @@ To activate this account, please click the following link within the next
 
 {{ request.scheme }}://{{ request.get_host }}{% url 'registration_activate' activation_key %}
 
-{% blocktrans %}
-Sincerely,
-The AIE Officers
-{% endblocktrans %}
 
