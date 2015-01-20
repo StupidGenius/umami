@@ -1,0 +1,56 @@
+#!/bin/sh
+# 
+# The MIT License (MIT)
+# 
+# Copyright (c) 2011-2015 Mark Rogaski
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# 
+# 
+
+# These do not need to be modified.
+export SECRET_KEY PYTHONHASHSEED 
+export DATABASE_URL
+export DEBUG TEMPLATE_DEBUG INTERNAL_IPS
+export DEFAULT_FROM_EMAIL SERVER_EMAIL
+export EMAIL_HOST EMAIL_PORT EMAIL_HOST_USER EMAIL_HOST_PASSWORD EMAIL_USE_TLS EMAIL_USE_SSL
+
+# Leave these.
+: ${SECRET_KEY=`openssl rand -base64 32`}
+PYTHONHASHSEED=random
+
+# Set this to the URL for the database if you are not using the default Postgres database.
+#DATABASE_URL=
+
+# Set these to turn on debugging and disable SSLify.  Do not enable these in production.
+DEBUG=
+TEMPLATE_DEBUG=
+INTERNAL_IPS=
+
+# Set these to match your local e-mail configuration.
+DEFAULT_FROM_EMAIL=webmaster@example.com
+SERVER_EMAIL=webmaster@example.com
+EMAIL_HOST=mail.example.com
+EMAIL_PORT=25
+EMAIL_HOST_USER=test
+EMAIL_HOST_PASSWORD=mctdyzrp
+EMAIL_USE_TLS=True
+EMAIL_USE_SSL=
+
+

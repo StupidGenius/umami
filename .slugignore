@@ -4,4 +4,5 @@ tests.pyc
 local.py
 local.pyc
 node_modules
+umami/scripts/
 

@@ -1,3 +1,5 @@
+"""
+
 The MIT License (MIT)
 
 Copyright (c) 2011-2015 Mark Rogaski
@@ -19,4 +21,19 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+"""
+
+from django.core.exceptions import ValidationError
+
+
+def validate_password_strength(password):
+    def entropy(string):
+        prob = [ float(string.count(c)) / len(string) for c in dict.fromkeys(list(string)) ]
+        entropy = - sum([ p * math.log(p) / math.log(2.0) for p in prob ])
+        return entropy
+
+    if entropy(password) < 1.5:
+        raise ValidationError(u'Password fails entropy check.')
+
 

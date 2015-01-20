@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block page_title %}{% trans "Log Out" %}{% endblock %}
+{% block page_title %}{% trans "Activation" %}{% endblock %}
 
 {% block page_content %}
 <div class="six wide column">
     <div class="ui top attached message">
-        <h3 class="header">{% trans "Logged Out" %}</h3>
+        <h3 class="header">{% trans "Activation E-Mail Sent" %}</h3>
     </div>
     <div class="ui bottom attached segment">
-        <p>{% trans "Your session has been closed." %}</p>
+        <p>{% trans "Please check your email to complete the registration process." %}</p>
     </div>
 </div>
 {% endblock %}

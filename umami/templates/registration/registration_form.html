@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Register" %}{% endblock %}
+
+{% block page_content %}
+<div class="six wide column">
+        <div class="ui top attached message">
+            <h3 class="header">{% trans "Registration" %}</h3>
+        </div>
+        <div class="ui bottom attached segment">
+            {% include "form_errors.html" %}
+            <div class="ui fluid form">
+                <form method="post" action=".">
+                    {% csrf_token %}
+                    {% include "form_field.html" with field=form.username %}
+                    {% include "form_field.html" with field=form.email %}
+                    {% include "form_field.html" with field=form.password1 %}
+                    {% include "form_field.html" with field=form.password2 %}
+                    <div class="ui hidden divider"></div>
+                    <button class="ui primary right labeled icon button" type="submit">
+                        <i class="signup icon"></i>
+                        {% trans "Sign Up" %}
+                    </button>
+                    <button class="ui right labeled icon button" type="reset">
+                        <i class="erase icon"></i>
+                        {% trans "Reset" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+</div>
+{% endblock %}
+

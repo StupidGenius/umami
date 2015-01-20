@@ -1,0 +1,43 @@
+{% load i18n %}
+{% load url from future %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>{{ site.name }} {% trans "registration" %}</title>
+</head>
+
+<body>
+<p>
+    {% blocktrans %}
+    You (or someone pretending to be you) have asked to register an account at
+    {{ request.scheme }}://{{ request.get_host }} .
+    {% endblocktrans %}
+</p>
+
+<ul>
+    <li style="list-style-type: none;">{% trans "Username" %}: <strong>{{ user.username }}</strong></li>
+</ul>
+
+<p>
+    {% blocktrans %}
+    If this wasn't you, please ignore this email
+    and your address will be removed from our records.
+    {% endblocktrans %}
+</p>
+<p>
+    {% blocktrans %}
+    To activate this account, please click the following link within the next
+    {{ expiration_days }} days:
+    {% endblocktrans %}
+</p>
+
+<p>
+    <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'registration_activate' activation_key %}">
+        {{ request.scheme }}://{{ request.get_host }}{% url 'registration_activate' activation_key %}
+    </a>
+</p>
+</body>
+
+</html>
+

@@ -1,31 +1,46 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block page_title %}Login{% endblock %}
+{% block page_title %}{% trans "Log In" %}{% endblock %}
 
 {% block page_content %}
-<div class="four wide column">
-        <div class="ui fluid form">
-            <form method="post" action=".">
-                {% csrf_token %}
-                {% include "form_field.html" with field=form.username %}
-                {% include "form_field.html" with field=form.password %}
-                <div class="ui hidden divider"></div>
-                <div class="ui primary right labeled icon button" onClick="document.forms[0].submit();">
-                    <i class="sign in icon"></i>
-                    Log In
+<div class="twelve wide column">
+    <div class="ui top attached message">
+        <h3 class="header">Log In</h3>
+    </div>
+    <div class="ui attached segment">
+        <div class="ui two column middle aligned relaxed fitted stackable grid">
+            <div class="column">
+                    {% include "form_errors.html" with header=_("Login Failed") %}
+                <div class="ui fluid form">
+                    <form method="post" action=".">
+                        {% csrf_token %}
+                        {% include "form_field.html" with field=form.username %}
+                        {% include "form_field.html" with field=form.password %}
+                        <div class="ui hidden divider"></div>
+                        <button class="ui primary right labeled icon button" type="submit">
+                            <i class="sign in icon"></i>
+                            {% trans "Log In" %}
+                        </button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </form>
                 </div>
-                <input type="hidden" name="next" value="{{ next }}" />
-            </form>
+            </div>
+            <div class="ui vertical divider">
+                Or
+            </div>
+            <div class="center aligned column">
+                <div class="ui green right labeled icon button" style="cursor: pointer;"
+                        onclick="window.location='{% url 'registration_register' %}';">
+                    <i class="signup icon"></i>
+                    {% trans "Sign Up" %}
+                </div>
+            </div>
         </div>
-        <div class="ui hidden divider"></div>
-        <div class="ui horizontal divider">
-            Or
-        </div>
-        <div class="ui hidden divider"></div>
-        <div class="ui green right labeled icon button">
-            <i class="signup icon"></i>
-            Sign Up
-        </div>
+    </div>
+    <div class="ui bottom attached message">
+        <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
+    </div>
 </div>
 {% endblock %}
 
