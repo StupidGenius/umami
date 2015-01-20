@@ -1,20 +1,17 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block page_title %}{% trans "Login" %}{% endblock %}
+{% block page_title %}{% trans "Log In" %}{% endblock %}
 
 {% block page_content %}
-<div class="column">
-    <h3 class="ui top attached header">Login</h3>
+<div class="twelve wide column">
+    <div class="ui top attached message">
+        <h3 class="header">Log In</h3>
+    </div>
     <div class="ui attached segment">
         <div class="ui two column middle aligned relaxed fitted stackable grid">
             <div class="column">
-                {% if form.non_field_errors %}
-                <div class="ui compact error message">
-                    <div class="header">{% trans "Login Failed" %}</div>
-                    <p>{{ form.non_field_errors }}</p>
-                </div>
-                {% endif %}
+                    {% include "form_errors.html" with header=_("Login Failed") %}
                 <div class="ui fluid form">
                     <form method="post" action=".">
                         {% csrf_token %}
@@ -40,6 +37,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="ui bottom attached message">
+        <p>{% trans "Forgot your password?" %} <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>.</p>
     </div>
 </div>
 {% endblock %}

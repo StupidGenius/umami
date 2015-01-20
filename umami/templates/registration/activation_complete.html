@@ -4,10 +4,12 @@
 {% block page_title %}{% trans "Account Activated" %}{% endblock %}
 
 {% block page_content %}
-<div class="four wide column">
-    <h3 class="ui top attached header">{% trans "Account Activated" %}</h3>
-    <div class="ui attached segment">
-        <p>{% trans "Your account is now activated." %}</p>
+<div class="six wide column">
+    <div class="ui top attached message">
+        <h3 class="header">{% trans "Account Activated" %}</h3>
+    </div>
+    <div class="ui bottom attached segment">
+        <p>{% trans "You may now log in to your account." %}</p>
         <div class="center aligned">
             <div class="ui primary right labeled icon button" style="cursor: pointer;" onclick="window.location='{% url 'auth_login' %}';">
                 <i class="sign in icon"></i>
