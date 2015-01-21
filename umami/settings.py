@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'registration',
     'widget_tweaks',
+    'umami',
     'accounts',
 )
 
