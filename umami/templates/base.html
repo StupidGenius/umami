@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load navigation %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,47 +11,65 @@
     <title>{% block page_title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ STATIC_URL }}ui/semantic.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}base.css">
+    <script src="{{ STATIC_URL }}ui/semantic.min.js"></script>
 </head>
 
 <body>
 
     <div class="ui fixed inverted menu page grid">
-        <a href="" class="brand item">UMAMI</a>
-        <a href="/" class="active item">Home</a>
-        <a href="" class="item">Games</a>
-        <a href="" class="item">Tools</a>
-        {% if user.is_active %}{% if user.is_staff or user.is_superuser %}
-        <a href="/admin/" class="item">Admin</a>
-        {% endif %}{% endif %}
+        <a href="" class="brand item">{% trans "UMAMI" %}</a>
+        <a href="/" class="{% active request "^/$" %} item">
+            <i class="home icon"></i>
+            {% trans "Home" %}
+        </a>
+        <a href="" class="{% active request "^/game" %} item">
+            <i class="users icon"></i>
+            {% trans "Games" %}
+        </a>
+        <a href="" class="{% active request "^/tool" %} item">
+            <i class="cubes icon"></i>
+            {% trans "Tools" %}
+        </a>
+        {% if user.is_active and user.is_staff %}
+            <div class="divider item"></div>
+            <a href="/admin/" class="item">
+                <i class="dashboard icon"></i>
+                {% trans "Dashboard" %}
+            </a>
+        {% endif %}
         <div class="right menu">
             {% if user.is_active %}
-            <div class="ui simple dropdown item">
-                <i class="dropdown icon"></i>
-                <div class="ui blue label">
+            <div class="item">
+                <span class="ui blue label">
                     <i class="user icon"></i>
                     {{ user.username }}
-                </div>
+                </span>
+            </div>
+            <div class="ui simple dropdown item">
+                <i class="suitcase icon" title="{% trans "Member Tools" %}"></i>
+                <i class="caret down icon"></i>
                 <div class="menu">
                     <a href="" class="item">
-                        <i class="settings icon"></i>
-                        Profile
+                        <i class="help circle icon"></i>
+                        {% trans "Support Request" %}
                     </a>
                     <a href="" class="item">
                         <i class="cloud icon"></i>
-                        ID Sync
-                    </a>
-                    <a href="" class="item">
-                        <i class="help circle icon"></i>
-                        Member Service
-                    </a>
-                    <a href="{% url 'auth_logout' %}" class="item">
-                        <i class="sign out icon"></i>
-                        Logout
+                        {% trans "ID Sync" %}
                     </a>
                 </div>
             </div>
+            <a href="" class="{% active request "^/account/profile$" %} item">
+                <i class="setting out icon" title="{% trans "Profile" %}"></i>
+            </a>
+            <a href="{% url 'auth_logout' %}" class="item">
+                <i class="sign out icon" title="{% trans "Log Out" %}"></i>
+            </a>
             {% else %}
-            <a href="{% url 'auth_login' %}" class="item">Login</a>
+            <button onclick="window.location.href='{% url "auth_login" %}'" class="ui primary button item">
+                <i class="sign in icon"></i>
+                {% trans "Log In" %}
+            </a>
             {% endif %}
         </div>
     </div>
