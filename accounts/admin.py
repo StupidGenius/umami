@@ -31,8 +31,14 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.forms import AdminPasswordChangeForm
 from django.contrib.auth.admin import UserAdmin
 
-from accounts.models import Member
+from accounts.models import Member, Profile
 from accounts.forms import MemberCreationForm, MemberChangeForm
+
+
+class ProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = False
+    verbose_name_plural = 'profile'
 
 class MemberAdmin(UserAdmin):
     save_on_top = True
@@ -61,6 +67,7 @@ class MemberAdmin(UserAdmin):
             'fields': ('username', 'password1', 'password2')}
         ),
     )
+    inlines = (ProfileInline,)
     list_filter = ['status', 'is_active', 'is_staff', 'is_superuser']
     list_display_links = ['username']
     ordering = ['id']

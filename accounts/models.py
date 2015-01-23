@@ -26,6 +26,7 @@ SOFTWARE.
 
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.db import models
 from django_enumfield import enum
 from django.contrib.auth.models import AbstractUser, UserManager
@@ -71,5 +72,15 @@ class Host(models.Model):
 
     def __unicode__(self):
         return self.address
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    birth_date = models.DateField(null=True, blank=True, verbose_name='birth date', help_text='date of birth')
+    email_updates = models.BooleanField(default=False, verbose_name='e-mail updates',
+                                        help_text='Receive e-mail updates and newletters')
+
+    def __unicode__(self):
+        return self.user.username
 
 
