@@ -24,6 +24,7 @@ SOFTWARE.
 
 """
 
+from __future__ import unicode_literals
 import os
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS

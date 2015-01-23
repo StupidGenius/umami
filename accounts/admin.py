@@ -24,6 +24,8 @@ SOFTWARE.
 
 """
 
+from __future__ import unicode_literals
+
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import AdminPasswordChangeForm
