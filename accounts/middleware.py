@@ -26,26 +26,15 @@ SOFTWARE.
 
 from __future__ import unicode_literals
 
-form accounts.models import Member, Profile, Host
-
-
-@receiver(post_save, sender=Member)
-def create_profile(sender, instance, created, **kwargs):
-    """Create a matching profile whenever a user object is created."""
-    if created:
-        profile, new = Profile.objects.get_or_create(member=instance)
-
-
-@receiver(user_logged_in, sender=Member)
-def login_handler(sender, request, **kwargs):
-    """Record the user IP address."""
-    try:
-        addr = request.META['REMOTE_ADDR']
-    except KeyError:
-        pass
-    else:
-        host, new = Host.objects.get_or_create(address=addr)
-        member = request.user
-        member.host.add(host)
+class RemoteAddrMiddleware(object):
+    """Taken from http://www.djangobook.com/en/2.0/chapter17.html """
+    def process_request(self, request):
+        try:
+            addr = request.META['HTTP_X_FORWARDED_FOR']
+        except KeyError:
+            pass
+        else:
+            addr = addr.split(',')[0]
+            request.META['REMOTE_ADDR'] = addr
 
 
