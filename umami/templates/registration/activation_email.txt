@@ -1,9 +1,8 @@
 {% load i18n %}
 {% load url from future %}
-{% blocktrans %}
-You (or someone pretending to be you) have asked to register an account at
+{% trans "You (or someone pretending to be you) have asked to register an account at" %}
 {{ request.scheme }}://{{ request.get_host }} . 
-{% endblocktrans %}
+
     {% trans "Username:" %} {{ user.username }}
 {% blocktrans %}
 If this wasn't you, please ignore this email and your address will be 
