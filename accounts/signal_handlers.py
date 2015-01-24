@@ -2,7 +2,7 @@
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Mark Rogaski
+Copyright (c) 2011-2015 Mark Rogaski
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,26 @@ SOFTWARE.
 
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, include, url
-from django.contrib import admin
+form accounts.models import Member, Profile, Host
 
-urlpatterns = patterns('',
-    url(r'^$', 'umami.views.home', name='home'),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^account/', include('registration.backends.default.urls')),
-)
+
+@receiver(post_save, sender=Member)
+def create_profile(sender, instance, created, **kwargs):
+    """Create a matching profile whenever a user object is created."""
+    if created:
+        profile, new = Profile.objects.get_or_create(member=instance)
+
+
+@receiver(user_logged_in, sender=Member)
+def login_handler(sender, request, **kwargs):
+    """Record the user IP address."""
+    try:
+        addr = request.META['REMOTE_ADDR']
+    except KeyError:
+        pass
+    else:
+        host, new = Host.objects.get_or_create(address=addr)
+        member = request.user
+        member.host.add(host)
+
 

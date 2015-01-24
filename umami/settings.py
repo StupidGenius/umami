@@ -24,6 +24,7 @@ SOFTWARE.
 
 """
 
+from __future__ import unicode_literals
 import os
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
@@ -78,6 +79,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'accounts.middleware.RemoteAddrMiddleware',
 )
 
 ALLOWED_HOSTS = ['*']

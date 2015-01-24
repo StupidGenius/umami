@@ -2,7 +2,7 @@
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Mark Rogaski
+Copyright (c) 2011-2015 Mark Rogaski
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,15 @@ SOFTWARE.
 
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, include, url
-from django.contrib import admin
+class RemoteAddrMiddleware(object):
+    """Taken from http://www.djangobook.com/en/2.0/chapter17.html """
+    def process_request(self, request):
+        try:
+            addr = request.META['HTTP_X_FORWARDED_FOR']
+        except KeyError:
+            pass
+        else:
+            addr = addr.split(',')[0]
+            request.META['REMOTE_ADDR'] = addr
 
-urlpatterns = patterns('',
-    url(r'^$', 'umami.views.home', name='home'),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^account/', include('registration.backends.default.urls')),
-)
 

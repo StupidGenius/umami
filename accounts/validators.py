@@ -24,6 +24,8 @@ SOFTWARE.
 
 """
 
+from __future__ import unicode_literals
+
 from django.core.exceptions import ValidationError
 
 
@@ -34,6 +36,6 @@ def validate_password_strength(password):
         return entropy
 
     if entropy(password) < 1.5:
-        raise ValidationError(u'Password fails entropy check.')
+        raise ValidationError('Password fails entropy check.')
 
 
