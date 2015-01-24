@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'debug_toolbar',
     'registration',
+    'timezone_field',
     'widget_tweaks',
     'umami',
     'accounts',
