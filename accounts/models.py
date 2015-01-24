@@ -32,7 +32,7 @@ from django_enumfield import enum
 from django.contrib.auth.models import AbstractUser, UserManager
 
 
-class MemberStatus(enum.Enum):
+class MemberType(enum.Enum):
     GUEST = 0
     ACTIVE = 1
     SUSPENDED = 2
@@ -48,7 +48,7 @@ class MemberStatus(enum.Enum):
 
 class Member(AbstractUser):
     """Extended User model."""
-    status = enum.EnumField(MemberStatus, default=MemberStatus.GUEST)
+    status = enum.EnumField(MemberType, default=MemberType.GUEST)
     host = models.ManyToManyField('Host', null=True, blank=True)
     display_name = models.CharField(max_length=32,
         null=True, blank=True, verbose_name=u'Display Name',
@@ -67,8 +67,7 @@ class Member(AbstractUser):
             
 
 class Host(models.Model):
-    address = models.GenericIPAddressField(blank=False, unique=True,
-        db_index=True)
+    address = models.GenericIPAddressField(blank=False, unique=True, db_index=True)
 
     def __unicode__(self):
         return self.address
@@ -82,5 +81,36 @@ class Profile(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+
+class ServiceType(enum.Enum):
+    EMAIL = 0
+    FROGPANTS = 1
+    TWITTER = 2
+    GOOGLE = 3
+    FACEBOOK = 4
+    SKYPE = 5
+    REDDIT = 6
+    GITHUB = 7
+    YAHOO = 8
+
+    labels = {
+        EMAIL: 'E-Mail',
+        FROGPANTS: 'FrogPants',
+        TWITTER: 'Twitter',
+        GOOGLE: 'Google',
+        FACEBOOK: 'Facebook',
+        SKYPE: 'Skype',
+        REDDIT: 'Reddit',
+        GITHUB: 'GitHub',
+        YAHOO: 'Yahoo!',
+    }
+
+
+class ContactAddress(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    service = enum.EnumField(ServiceType, null=False)
+    address = models.CharField(max_length=256, blank=False)
+    public = models.BooleanField(default=False)
 
 
