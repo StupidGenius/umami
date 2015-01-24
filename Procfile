@@ -1,2 +1,2 @@
-web: waitress-serve --port=$PORT umami.wsgi:application
+web: uwsgi umami/uwsgi.ini
 
