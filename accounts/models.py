@@ -25,11 +25,14 @@ SOFTWARE.
 """
 
 from __future__ import unicode_literals
+import pytz
 
 from django.conf import settings
 from django.db import models
 from django_enumfield import enum
 from django.contrib.auth.models import AbstractUser, UserManager
+
+from timezone_field import TimeZoneField
 
 
 class MemberType(enum.Enum):
@@ -75,9 +78,10 @@ class Host(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    birth_date = models.DateField(null=True, blank=True, verbose_name='birth date', help_text='date of birth')
+    timezone = TimeZoneField(default='UTC')
     email_updates = models.BooleanField(default=False, verbose_name='e-mail updates',
                                         help_text='Receive e-mail updates and newletters')
+    birth_date = models.DateField(null=True, blank=True, verbose_name='birth date', help_text='date of birth')
 
     def __unicode__(self):
         return self.user.username

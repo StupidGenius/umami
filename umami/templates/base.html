@@ -1,83 +1,36 @@
 {% load i18n %}
 {% load navigation %}
+{% load compress %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="description" content="">
-    <meta name=viewport content="width=device-width, initial-scale=1">
-    <meta name="mobile-web-app-capable" content="yes">
     <title>{% block page_title %}{% endblock %}</title>
+    {% compress css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}ui/semantic.min.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}base.css">
+    {% endcompress %}
+    {% compress js %}
     <script src="{{ STATIC_URL }}ui/semantic.min.js"></script>
+    {% endcompress %}
 </head>
 
 <body>
-
-    <div class="ui fixed inverted menu page grid">
-        <a href="" class="brand item">{% trans "UMAMI" %}</a>
-        <a href="/" class="{% active request "^/$" %} item">
-            <i class="home icon"></i>
-            {% trans "Home" %}
-        </a>
-        <a href="" class="{% active request "^/game" %} item">
-            <i class="users icon"></i>
-            {% trans "Games" %}
-        </a>
-        <a href="" class="{% active request "^/tool" %} item">
-            <i class="cubes icon"></i>
-            {% trans "Tools" %}
-        </a>
-        {% if user.is_active and user.is_staff %}
-            <div class="divider item"></div>
-            <a href="/admin/" class="item">
-                <i class="dashboard icon"></i>
-                {% trans "Dashboard" %}
-            </a>
-        {% endif %}
-        <div class="right menu">
-            {% if user.is_active %}
-            <div class="item">
-                <span class="ui blue label">
-                    <i class="user icon"></i>
-                    {{ user.username }}
-                </span>
-            </div>
-            <div class="ui simple dropdown item">
-                <i class="suitcase icon" title="{% trans "Member Tools" %}"></i>
-                <i class="caret down icon"></i>
-                <div class="menu">
-                    <a href="" class="item">
-                        <i class="help circle icon"></i>
-                        {% trans "Support Request" %}
-                    </a>
-                    <a href="" class="item">
-                        <i class="cloud icon"></i>
-                        {% trans "ID Sync" %}
-                    </a>
-                </div>
-            </div>
-            <a href="" class="{% active request "^/account/profile$" %} item">
-                <i class="setting out icon" title="{% trans "Profile" %}"></i>
-            </a>
-            <a href="{% url 'auth_logout' %}" class="item">
-                <i class="sign out icon" title="{% trans "Log Out" %}"></i>
-            </a>
-            {% else %}
-            <button onclick="window.location.href='{% url "auth_login" %}'" class="ui primary button item">
-                <i class="sign in icon"></i>
-                {% trans "Log In" %}
-            </a>
-            {% endif %}
+    <div id="umami-wrapper">
+        {% block page_menu %}
+        {% include "menu.html" %}
+        {% endblock %}
+        <main id="umami-content" class="ui page grid">
+            {% block page_content %}{% endblock %}
+        </main>
+        <div id="umami-footer">
+            {% block page_footer %}
+            {% include "footer.html" %}
+            {% endblock %}
         </div>
     </div>
-
-    <div class="ui main page grid">
-    {% block page_content %}{% endblock %}
-    </div>
-
 </body>
 
 </html>

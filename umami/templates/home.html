@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block page_title %}{% trans "Home" %}{% endblock %}
+{% block page_content %}
+<div class="column">
+    <div class="ui basic segment">
+        <h1 class="ui header">
+            <div class="ui circular image">
+                <img src="https://umami.aie-universal.net/static/img/icon/aie_logo_140.png">
+            </div>
+            <div class="content" style="vertical-align: middle;">
+                {% trans "UMAMI" %}
+                <div class="sub header">{% trans "Universal Multigame AIE Member Interface" %}</div>
+            </div>
+        </h1>
+    </div>
+</div>
+{% endblock %}
