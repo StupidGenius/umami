@@ -1,0 +1,51 @@
+{% load i18n %}
+{% load navigation %}
+<nav id="umami-header" class="ui page grid inverted fixed navbar menu">
+    <a href="" class="brand item">{% trans "UMAMI" %}</a>
+    <a href="/" class="{% active request "^/$" %} item">
+        <i class="home icon"></i>
+        {% trans "Home" %}
+    </a>
+    <a href="" class="{% active request "^/game" %} item">
+        <i class="users icon"></i>
+        {% trans "Games" %}
+    </a>
+    <a href="" class="{% active request "^/tool" %} item">
+        <i class="cubes icon"></i>
+        {% trans "Tools" %}
+    </a>
+    {% if user.is_active and user.is_staff %}
+        <div class="divider item"></div>
+        <a href="/admin/" class="item">
+            <i class="dashboard icon"></i>
+            {% trans "Dashboard" %}
+        </a>
+    {% endif %}
+    <div class="right menu">
+        {% if user.is_active %}
+        <div class="item">
+            <span class="ui blue label">
+                <i class="user icon"></i>
+                {{ user.username }}
+            </span>
+        </div>
+        <a href="" class="item">
+            <i class="help circle icon" title="{% trans "Support Request" %}"></i>
+        </a>
+        <a href="" class="item">
+            <i class="cloud icon" title="{% trans "ID Sync" %}"></i>
+        </a>
+        <a href="/profile/" class="{% active request "^/profile/$" %} item">
+            <i class="setting out icon" title="{% trans "Profile" %}"></i>
+        </a>
+        <a href="{% url 'auth_logout' %}" class="item">
+            <i class="sign out icon" title="{% trans "Log Out" %}"></i>
+        </a>
+        {% else %}
+        <button onclick="window.location.href='{% url "auth_login" %}'" class="ui primary button item">
+            <i class="sign in icon"></i>
+            {% trans "Log In" %}
+        </a>
+        {% endif %}
+    </div>
+</nav>

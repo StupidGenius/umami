@@ -1,5 +1,5 @@
  /*
- * # Semantic UI - 1.6.1
+ * # Semantic UI - 1.8.0
  * https://github.com/Semantic-Org/Semantic-UI
  * http://www.semantic-ui.com/
  *
@@ -592,9 +592,13 @@
 
 .ui.tabular.menu {
   background-color: transparent;
-  border-bottom: 1px solid #d4d4d5;
   border-radius: 0em;
   box-shadow: none !important;
+  border-bottom: 1px solid #d4d4d5;
+}
+.ui.tabular.fluid.menu {
+  width: -webkit-calc(100% +  2px ) !important;
+  width: calc(100% +  2px ) !important;
 }
 .ui.tabular.menu .item {
   background-color: transparent;
@@ -623,8 +627,8 @@
   border-color: #d4d4d5;
   font-weight: bold;
   margin-bottom: -1px;
-  border-bottom: 1px solid #ffffff;
-  box-shadow: none;
+  border-bottom: none;
+  box-shadow: 0px 2px 0px -1px #ffffff;
   border-radius: 5px 5px 0px 0px;
 }
 
@@ -633,9 +637,10 @@
   position: relative;
   z-index: 2;
 }
-.ui.tabular.menu ~ .bottom.attached.segment {
+.ui.tabular.menu + .bottom.attached.segment,
+.ui.tabular.menu ~ .bottom.attached.segment + .bottom.attached.segment {
   border-top: none;
-  margin: -1px 0px 0px;
+  margin: 0px;
 }
 
 /*--------------
@@ -980,11 +985,19 @@
 .ui.text.attached.menu {
   box-shadow: none;
 }
+
+/* Inverted */
 .ui.inverted.text.menu,
 .ui.inverted.text.menu .item,
 .ui.inverted.text.menu .item:hover,
 .ui.inverted.text.menu .item.active {
   background-color: transparent;
+}
+
+/* Fluid */
+.ui.fluid.text.menu {
+  margin-left: 0em;
+  margin-right: 0em;
 }
 
 /*--------------
@@ -1466,24 +1479,22 @@
 
 .ui.pointing.menu .active.item:after {
   position: absolute;
-  bottom: -0.3em;
-  left: 50%;
   content: '';
-  margin-left: -0.3em;
+  top: 100%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+      -ms-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+          transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  margin: 1px 0em 0em 0em;
+  background: none;
   width: 0.6em;
   height: 0.6em;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  background: none;
-  -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-          transform: rotate(45deg);
+  border-bottom: 1px solid #d4d4d5;
+  border-right: 1px solid #d4d4d5;
   z-index: 2;
-  -webkit-transition: background 0.2s ease
-  ;
-          transition: background 0.2s ease
-  ;
+  -webkit-transition: background 0.2s ease;
+          transition: background 0.2s ease;
 }
 
 /* Don't double up pointers */
@@ -1493,13 +1504,16 @@
 .ui.vertical.pointing.menu .active.item:after {
   position: absolute;
   top: 50%;
-  margin-top: -0.3em;
-  right: -0.3em;
+  right: 0%;
   bottom: auto;
   left: auto;
+  -webkit-transform: translateX(50%) translateY(-50%) rotate(45deg);
+      -ms-transform: translateX(50%) translateY(-50%) rotate(45deg);
+          transform: translateX(50%) translateY(-50%) rotate(45deg);
+  margin: 0em -1px 0em 0em;
   border: none;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid #d4d4d5;
+  border-right: 1px solid #d4d4d5;
 }
 
 /* Colors */
@@ -1507,13 +1521,13 @@
   background-color: #fafafa;
 }
 .ui.pointing.menu .active.item:after {
-  background-color: #f6f6f6;
+  background-color: #f7f7f7;
 }
 .ui.vertical.pointing.menu .item:hover:after {
   background-color: #fafafa;
 }
 .ui.vertical.pointing.menu .active.item:after {
-  background-color: #fcfcfc;
+  background-color: #f7f7f7;
 }
 
 /*--------------

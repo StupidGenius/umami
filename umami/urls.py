@@ -33,5 +33,6 @@ urlpatterns = patterns('',
     url(r'^$', 'umami.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('registration.backends.default.urls')),
+    url(r'^profile/', include('accounts.urls')),
 )
 
