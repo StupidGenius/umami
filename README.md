@@ -63,6 +63,13 @@ source local_config.sh
 python manage.py syncdb
 ```
 
+- Prepare the static content.
+ 
+```shell
+python manage.py collectstatic
+python manage.py compress
+```
+
 - Start the test server.
 
 ```shell
@@ -105,5 +112,12 @@ git push heroku master
 
 ```shell
 heroku run python manage.py syncdb
+```
+
+- Prepare the static content.
+ 
+```shell
+heroku run python manage.py collectstatic
+heroku run python manage.py compress
 ```
 
